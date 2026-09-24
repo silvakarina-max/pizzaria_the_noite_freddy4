@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzaria Bella Massa | Delivery & Loja Online</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: #fffaf5;
+            color: #3e2c1b;
+        }
+
+        /* Paleta: vermelho #c62828, branco #ffffff, marrom #5d3a1a / #8b5a2b */
+        .top-bar {
+            background-color: #c62828;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-size: 0.95rem;
+            border-bottom: 3px solid #8b5a2b;
+        }
+
+        header {
+            background-color: #ffffff;
+            padding: 20px 5%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid #f0e0d0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 2.8rem;
+            line-height: 1;
+        }
+
+        .logo-text h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #c62828;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            color: #8b5a2b;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+        }
+
+        .cart-icon {
+            background-color: #f5ede6;
+            padding: 12px 18px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: #5d3a1a;
+            border: 1px solid #d9c2b0;
+            cursor: default;
+        }
+
+        .cart-icon span {
+            background-color: #c62828;
+            color: white;
+            border-radius: 50%;
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(145deg, #ffffff 0%, #fdf3ea 100%);
+            padding: 40px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            border-bottom: 3px solid #e6d3c4;
+        }
+
+        .hero-content {
+            flex: 1 1 350px;
+        }
+
+        .hero-content h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #2e1b0e;
+            line-height: 1.2;
+        }
+
+        .hero-content h2 span {
+            color: #c62828;
+            border-bottom: 4px solid #8b5a2b;
+            padding-bottom: 4px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin: 20px 0 30px;
+            color: #5d3a1a;
+        }
+
+        .btn-whatsapp-hero {
+            background-color: #25d366;
+            color: #ffffff;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 8px 16px rgba(37, 211, 102, 0.3);
+            transition: 0.2s;
+            text-decoration: none;
+            border: 2px solid #ffffff;
+        }
+
+        .btn-whatsapp-hero:hover {
+            background-color: #1ea952;
+            transform: scale(1.02);
+        }
+
+        .hero-image {
+            flex: 1 1 300px;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 50% 30% 40% 30% / 40% 50% 30% 50%;
+            box-shadow: 0 30px 30px -15px rgba(93, 58, 26, 0.3);
+            border: 6px solid white;
+            background: #fef3e9;
+            width: 380px;
+            height: 380px;
+            object-fit: cover;
+        }
+
+        /* SEÇÃO CARDÁPIO */
+        .section-title {
+            text-align: center;
+            margin: 50px 0 30px;
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #2e1b0e;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: #c62828;
+            margin: 12px auto 0;
+            border-radius: 5px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 0 5% 30px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 15px 25px -8px rgba(93, 58, 26, 0.12);
+            transition: 0.2s;
+            border: 1px solid #f0e0d0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 35px -10px rgba(198, 40, 40, 0.2);
+            border-color: #c62828;
+        }
+
+        .card-img {
+            height: 180px;
+            background-color: #f7ede4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            border-bottom: 3px solid #e6d3c4;
+        }
+
+        .card-content {
+            padding: 20px 18px 18px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2e1b0e;
+            margin-bottom: 6px;
+        }
+
+        .card-content .desc {
+            font-size: 0.9rem;
+            color: #8b5a2b;
+            margin-bottom: 14px;
+            flex: 1;
+        }
+
+        .price-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 8px;
+        }
+
+        .price {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #c62828;
+        }
+
+        .price small {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #8b5a2b;
+        }
+
+        .btn-add {
+            background-color: #c62828;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.1s;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 8px rgba(198, 40, 40, 0.2);
+        }
+
+        .btn-add:hover {
+            background-color: #a51e1e;
+        }
+
+        .btn-add:active {
+            transform: scale(0.96);
+        }
+
+        /* Bebidas */
+        .bebidas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            padding: 0 5% 30px;
+        }
+
+        .bebida-card {
+            background: white;
+            border-radius: 25px;
+            padding: 18px 15px;
+            text-align: center;
+            box-shadow: 0 10px 18px -8px rgba(93, 58, 26, 0.1);
+            border: 1px solid #f0e0d0;
+            transition: 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bebida-card:hover {
+            border-color: #c62828;
+            transform: translateY(-4px);
+        }
+
+        .bebida-emoji {
+            font-size: 2.8rem;
+            margin-bottom: 6px;
+        }
+
+        .bebida-card h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2e1b0e;
+        }
+
+        .bebida-card .bebida-desc {
+            font-size: 0.8rem;
+            color: #8b5a2b;
+            margin: 6px 0;
+        }
+
+        .bebida-price {
+            font-weight: 800;
+            color: #c62828;
+            font-size: 1.3rem;
+            margin: 6px 0 10px;
+        }
+
+        .btn-bebida {
+            background-color: #8b5a2b;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.1s;
+            width: 100%;
+        }
+
+        .btn-bebida:hover {
+            background-color: #6b421e;
+        }
+
+        /* Carrinho/Resumo do pedido */
+        .carrinho-section {
+            background-color: #fdf3ea;
+            padding: 30px 5%;
+            margin: 30px 0;
+            border-top: 3px solid #e6d3c4;
+            border-bottom: 3px solid #e6d3c4;
+        }
+
+        .carrinho-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 40px;
+            padding: 28px 30px;
+            box-shadow: 0 20px 30px -10px rgba(93, 58, 26, 0.15);
+        }
+
+        .carrinho-container h3 {
+            font-size: 2rem;
+            color: #2e1b0e;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 3px dashed #d9c2b0;
+            padding-bottom: 15px;
+        }
+
+        .lista-pedido {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding-right: 6px;
+        }
+
+        .item-pedido {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0e0d0;
+            font-weight: 500;
+        }
+
+        .item-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .item-nome {
+            font-weight: 600;
+            color: #2e1b0e;
+            font-size: 1.05rem;
+        }
+
+        .item-preco {
+            color: #c62828;
+            font-weight: 700;
+            margin-left: 10px;
+        }
+
+        .item-quantidade {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .item-quantidade button {
+            background: #f0e0d0;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #5d3a1a;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+
+        .item-quantidade button:hover {
+            background: #c62828;
+            color: white;
+        }
+
+        .item-remover {
+            background: transparent;
+            border: none;
+            color: #b57c5e;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-left: 12px;
+            font-weight: 700;
+        }
+
+        .item-remover:hover {
+            color: #c62828;
+        }
+
+        .total-pedido {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #2e1b0e;
+            margin: 20px 0 25px;
+            padding-top: 15px;
+            border-top: 3px solid #e6d3c4;
+        }
+
+        .total-pedido span:last-child {
+            color: #c62828;
+        }
+
+        .btn-finalizar {
+            background-color: #25d366;
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 60px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            width: 100%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: 0.2s;
+            box-shadow: 0 10px 18px -5px rgba(37, 211, 102, 0.4);
+            border: 2px solid white;
+        }
+
+        .btn-finalizar:hover {
+            background-color: #1ea952;
+            transform: scale(1.01);
+        }
+
+        .btn-finalizar:disabled {
+            background-color: #ccc;
+            box-shadow: none;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .aviso-whats {
+            text-align: center;
+            margin-top: 14px;
+            font-size: 0.95rem;
+            color: #5d3a1a;
+            font-weight: 500;
+        }
+
+        .aviso-whats strong {
+            color: #25d366;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #2e1b0e;
+            color: #f0e0d0;
+            padding: 30px 5%;
+            text-align: center;
+            border-top: 8px solid #c62828;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 8px 0;
+        }
+
+        .footer-contato {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+            background: #c62828;
+            display: inline-block;
+            padding: 10px 28px;
+            border-radius: 40px;
+            margin: 15px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-contato i {
+            font-style: normal;
+            margin-right: 8px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+            .logo-text h1 {
+                font-size: 1.5rem;
+            }
+            .section-title {
+                font-size: 1.9rem;
+            }
+            .carrinho-container {
+                padding: 20px;
+            }
+            .item-pedido {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .total-pedido {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        🍕 Entrega rápida • Massa artesanal • Peça já! (81) 9269-1238
+    </div>
+
+    <header>
+        <div class="logo-area">
+            <div class="logo-icon">🍕</div>
+            <div class="logo-text">
+                <h1>Bella Massa</h1>
+                <p>PIZZARIA & DELIVERY</p>
+            </div>
+        </div>
+        <div class="cart-icon">
+            🛒 <span id="contadorCarrinho">0</span> itens
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Pizza quentinha <span>direto pra você</span></h2>
+            <p>Massa fininha, ingredientes selecionados e aquele sabor de forno à lenha. Peça agora e receba em casa.</p>
+            <a href="#menu" class="btn-whatsapp-hero">
+                📋 Ver cardápio
+            </a>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&auto=format&fit=crop&q=80" alt="Pizza artesanal deliciosa">
+        </div>
+    </section>
+
+    <!-- CARDÁPIO DE PIZZAS -->
+    <h2 class="section-title" id="menu">🍕 Nossas Pizzas</h2>
+    <div class="menu-grid" id="pizzasGrid">
+        <!-- Os cards de pizza são gerados via JS para facilitar a manutenção, mas deixamos o HTML base também. 
+             Usaremos JS para preencher e manter a lógica do carrinho. 
+             No entanto, para garantir que o site funcione mesmo com JS desabilitado, deixamos uma estrutura estática? 
+             Mas a lógica depende de JS, então vamos popular via JS. -->
+    </div>
+
+    <!-- BEBIDAS -->
+    <h2 class="section-title">🥤 Bebidas Geladas</h2>
+    <div class="bebidas-grid" id="bebidasGrid">
+        <!-- Preenchido via JavaScript -->
+    </div>
+
+    <!-- CARRINHO / RESUMO DO PEDIDO -->
+    <div class="carrinho-section" id="carrinho">
+        <div class="carrinho-container">
+            <h3>🛒 Seu pedido</h3>
+            <div class="lista-pedido" id="listaPedido">
+                <p style="color: #8b5a2b; text-align: center; padding: 20px;">Seu carrinho está vazio. Adicione pizzas e bebidas!</p>
+            </div>
+            <div class="total-pedido">
+                <span>Total:</span>
+                <span id="totalValor">R$ 0,00</span>
+            </div>
+            <button class="btn-finalizar" id="btnFinalizar" disabled>
+                ✅ Confirmar pedido no WhatsApp
+            </button>
+            <p class="aviso-whats">
+                Ao confirmar, os detalhes do pedido serão enviados para <strong>(81) 9269-1238</strong>
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>🍕 Bella Massa Pizzaria</p>
+        <div class="footer-contato">
+            <i>📞</i> (81) 9269-1238
+        </div>
+        <p>Av. dos Sabores, 123 - Centro • Aberto de ter a dom, 18h às 23h</p>
+        <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.7;">&copy; 2025 Bella Massa. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // ========== CONFIGURAÇÃO ==========
+        const TELEFONE_WHATSAPP = '558192691238'; // Número com DDI 55 + DDD 81 + número
+
+        // ========== DADOS DO CARDÁPIO ==========
+        const pizzas = [
+            { id: 'p1', nome: 'Margherita', desc: 'Molho de tomate, muçarela, manjericão fresco e parmesão.', preco: 42.90, emoji: '🍕' },
+            { id: 'p2', nome: 'Calabresa', desc: 'Calabresa fatiada, cebola, muçarela e orégano.', preco: 46.90, emoji: '🍕' },
+            { id: 'p3', nome: 'Frango c/ Catupiry', desc: 'Frango desfiado, catupiry, milho e cheiro-verde.', preco: 52.90, emoji: '🍕' },
+            { id: 'p4', nome: 'Portuguesa', desc: 'Presunto, ovos, cebola, azeitona, muçarela e ervilha.', preco: 49.90, emoji: '🍕' },
+            { id: 'p5', nome: 'Quatro Queijos', desc: 'Muçarela, provolone, gorgonzola e parmesão.', preco: 56.90, emoji: '🍕' },
+            { id: 'p6', nome: 'Pepperoni', desc: 'Pepperoni fatiado, muçarela e molho especial.', preco: 54.90, emoji: '🍕' },
+            { id: 'p7', nome: 'Vegetariana', desc: 'Abobrinha, berinjela, pimentão, cebola e muçarela.', preco: 48.90, emoji: '🍕' },
+            { id: 'p8', nome: 'Doce de Chocolate', desc: 'Chocolate ao leite, morangos e granulado.', preco: 45.90, emoji: '🍫' }
+        ];
+
+        const bebidas = [
+            { id: 'b1', nome: 'Refrigerante Lata', desc: 'Coca-Cola, Guaraná, Fanta (350ml)', preco: 6.90, emoji: '🥤' },
+            { id: 'b2', nome: 'Suco Natural', desc: 'Laranja, limão ou abacaxi (500ml)', preco: 12.90, emoji: '🧃' },
+            { id: 'b3', nome: 'Água Mineral', desc: 'Com ou sem gás (500ml)', preco: 5.50, emoji: '💧' },
+            { id: 'b4', nome: 'Cerveja Long Neck', desc: 'Heineken, Budweiser ou Corona', preco: 14.90, emoji: '🍺' },
+            { id: 'b5', nome: 'Vinho Taça', desc: 'Tinto ou branco (150ml)', preco: 19.90, emoji: '🍷' },
+            { id: 'b6', nome: 'Energético', desc: 'Red Bull (250ml)', preco: 15.90, emoji: '⚡' }
+        ];
+
+        // ========== ESTADO DO CARRINHO ==========
+        let carrinho = []; // { id, nome, preco, quantidade, tipo }
+
+        // ========== FUNÇÕES AUXILIARES ==========
+        function formatarPreco(valor) {
+            return `R$ ${valor.toFixed(2).replace('.', ',')}`;
+        }
+
+        // ========== RENDERIZAR CARDS ==========
+        function renderizarPizzas() {
+            const grid = document.getElementById('pizzasGrid');
+            grid.innerHTML = pizzas.map(p => `
+                <div class="card" data-id="${p.id}">
+                    <div class="card-img">${p.emoji}</div>
+                    <div class="card-content">
+                        <h3>${p.nome}</h3>
+                        <p class="desc">${p.desc}</p>
+                        <div class="price-row">
+                            <div class="price">${formatarPreco(p.preco)} <small>/ un</small></div>
+                            <button class="btn-add" data-id="${p.id}" data-tipo="pizza" data-nome="${p.nome}" data-preco="${p.preco}">
+                                + Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderizarBebidas() {
+            const grid = document.getElementById('bebidasGrid');
+            grid.innerHTML = bebidas.map(b => `
+                <div class="bebida-card" data-id="${b.id}">
+                    <div class="bebida-emoji">${b.emoji}</div>
+                    <h4>${b.nome}</h4>
+                    <div class="bebida-desc">${b.desc}</div>
+                    <div class="bebida-price">${formatarPreco(b.preco)}</div>
+                    <button class="btn-bebida" data-id="${b.id}" data-tipo="bebida" data-nome="${b.nome}" data-preco="${b.preco}">
+                        Adicionar
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // ========== ADICIONAR ITEM ==========
+        function adicionarItem(id, tipo, nome, preco) {
+            const itemExistente = carrinho.find(item => item.id === id);
+            if (itemExistente) {
+                itemExistente.quantidade += 1;
+            } else {
+                carrinho.push({
+                    id,
+                    tipo,
+                    nome,
+                    preco: parseFloat(preco),
+                    quantidade: 1
+                });
+            }
+            atualizarCarrinho();
+        }
+
+        // ========== ATUALIZAR INTERFACE DO CARRINHO ==========
+        function atualizarCarrinho() {
+            const listaPedido = document.getElementById('listaPedido');
+            const totalValor = document.getElementById('totalValor');
+            const contadorCarrinho = document.getElementById('contadorCarrinho');
+            const btnFinalizar = document.getElementById('btnFinalizar');
+
+            // Contador total de itens
+            const totalItens = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
+            contadorCarrinho.textContent = totalItens;
+
+            // Se carrinho vazio
+            if (carrinho.length === 0) {
+                listaPedido.innerHTML = '<p style="color: #8b5a2b; text-align: center; padding: 20px;">Seu carrinho está vazio. Adicione pizzas e bebidas!</p>';
+                totalValor.textContent = 'R$ 0,00';
+                btnFinalizar.disabled = true;
+                return;
+            }
+
+            btnFinalizar.disabled = false;
+
+            // Montar lista
+            let html = '';
+            let total = 0;
+
+            carrinho.forEach((item, index) => {
+                const subtotal = item.preco * item.quantidade;
+                total += subtotal;
+                html += `
+                    <div class="item-pedido">
+                        <div class="item-info">
+                            <span class="item-nome">${item.nome}</span>
+                            <span class="item-preco">${formatarPreco(item.preco)}</span>
+                        </div>
+                        <div class="item-quantidade">
+                            <button onclick="alterarQuantidade(${index}, -1)">−</button>
+                            <span style="font-weight:700; min-width:22px; text-align:center;">${item.quantidade}</span>
+                            <button onclick="alterarQuantidade(${index}, 1)">+</button>
+                            <button class="item-remover" onclick="removerItem(${index})">✕</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            listaPedido.innerHTML = html;
+            totalValor.textContent = formatarPreco(total);
+        }
+
+        // ========== ALTERAR QUANTIDADE ==========
+        window.alterarQuantidade = function(index, delta) {
+            if (index < 0 || index >= carrinho.length) return;
+            const item = carrinho[index];
+            const novaQuantidade = item.quantidade + delta;
+            if (novaQuantidade <= 0) {
+                carrinho.splice(index, 1);
+            } else {
+                item.quantidade = novaQuantidade;
+            }
+            atualizarCarrinho();
+        };
+
+        // ========== REMOVER ITEM ==========
+        window.removerItem = function(index) {
+            if (index < 0 || index >= carrinho.length) return;
+            carrinho.splice(index, 1);
+            atualizarCarrinho();
+        };
+
+        // ========== FINALIZAR PEDIDO (WHATSAPP) ==========
+        function finalizarPedido() {
+            if (carrinho.length === 0) return;
+
+            // Montar mensagem
+            let mensagem = '🍕 *NOVO PEDIDO - BELLA MASSA* 🍕\n\n';
+            let total = 0;
+
+            carrinho.forEach(item => {
+                const subtotal = item.preco * item.quantidade;
+                total += subtotal;
+                mensagem += `▪️ ${item.quantidade}x ${item.nome} — ${formatarPreco(subtotal)}\n`;
+            });
+
+            mensagem += `\n*Total: ${formatarPreco(total)}*\n\n`;
+            mensagem += `📌 *Por favor, confirme meu pedido e o endereço de entrega.*`;
+
+            // Codificar para URL
+            const mensagemCodificada = encodeURIComponent(mensagem);
+            const linkWhatsapp = `https://wa.me/${TELEFONE_WHATSAPP}?text=${mensagemCodificada}`;
+
+            // Abrir WhatsApp
+            window.open(linkWhatsapp, '_blank');
+        }
+
+        // ========== INICIALIZAÇÃO ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            renderizarPizzas();
+            renderizarBebidas();
+
+            // Event delegation para botões de adicionar (pizzas e bebidas)
+            document.addEventListener('click', (e) => {
+                const btnAdd = e.target.closest('.btn-add');
+                const btnBebida = e.target.closest('.btn-bebida');
+
+                if (btnAdd) {
+                    const { id, tipo, nome, preco } = btnAdd.dataset;
+                    adicionarItem(id, tipo, nome, parseFloat(preco));
+                }
+
+                if (btnBebida) {
+                    const { id, tipo, nome, preco } = btnBebida.dataset;
+                    adicionarItem(id, tipo, nome, parseFloat(preco));
+                }
+            });
+
+            // Botão finalizar
+            document.getElementById('btnFinalizar').addEventListener('click', finalizarPedido);
+
+            // Inicializa carrinho vazio
+            atualizarCarrinho();
+        });
+
+        // Expor funções de alteração para o escopo global (já estão como window.*)
+    </script>
+</body>
+</html>
